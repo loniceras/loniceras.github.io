@@ -1,0 +1,1341 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.0.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="本文译自 https://ncatlab.org/nlab/show/abstraction. 介绍抽象或一般化是数学研究的基本策略. 通过阐述一个论点或将一个概念置于“适当的普遍性”中, 我们不仅可以加强结论和拓宽适用性, 而且可以更清晰地察觉数学概念中真正重要的部分. 毫不夸张地说, 现代代数 (尤其是范畴代数) 的发展驱动力来源于提取数学结构的本质并置于公理化的一般框架中的需求. 这对诸如拓">
+<meta name="keywords" content="数学,译作">
+<meta property="og:type" content="article">
+<meta property="og:title" content="浅谈“抽象”">
+<meta property="og:url" content="http://loniceras.github.io/2019/05/02/浅谈抽象/index.html">
+<meta property="og:site_name" content="Lonicera&#39;s Blog">
+<meta property="og:description" content="本文译自 https://ncatlab.org/nlab/show/abstraction. 介绍抽象或一般化是数学研究的基本策略. 通过阐述一个论点或将一个概念置于“适当的普遍性”中, 我们不仅可以加强结论和拓宽适用性, 而且可以更清晰地察觉数学概念中真正重要的部分. 毫不夸张地说, 现代代数 (尤其是范畴代数) 的发展驱动力来源于提取数学结构的本质并置于公理化的一般框架中的需求. 这对诸如拓">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-05-03T05:22:57.407Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="浅谈“抽象”">
+<meta name="twitter:description" content="本文译自 https://ncatlab.org/nlab/show/abstraction. 介绍抽象或一般化是数学研究的基本策略. 通过阐述一个论点或将一个概念置于“适当的普遍性”中, 我们不仅可以加强结论和拓宽适用性, 而且可以更清晰地察觉数学概念中真正重要的部分. 毫不夸张地说, 现代代数 (尤其是范畴代数) 的发展驱动力来源于提取数学结构的本质并置于公理化的一般框架中的需求. 这对诸如拓">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Lonicera's Blog" type="application/atom+xml">
+
+
+
+
+  <link rel="canonical" href="http://loniceras.github.io/2019/05/02/浅谈抽象/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>浅谈“抽象” | Lonicera's Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Lonicera's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://loniceras.github.io/2019/05/02/浅谈抽象/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Lonicera">
+      <meta itemprop="description" content="Pour l'honneur de l'esprit humain">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lonicera's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">浅谈“抽象”
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-05-02 16:55:44" itemprop="dateCreated datePublished" datetime="2019-05-02T16:55:44+08:00">2019-05-02</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-05-03 13:22:57" itemprop="dateModified" datetime="2019-05-03T13:22:57+08:00">2019-05-03</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/数学/" itemprop="url" rel="index"><span itemprop="name">数学</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <a href="/2019/05/02/浅谈抽象/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2019/05/02/浅谈抽象/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+            <span id="/2019/05/02/浅谈抽象/" class="leancloud_visitors" data-flag-title="浅谈“抽象”">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读次数：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>本文译自 <a href="https://ncatlab.org/nlab/show/abstraction" target="_blank" rel="noopener">https://ncatlab.org/nlab/show/abstraction</a>.</p>
+<h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>抽象或一般化是数学研究的基本策略. 通过阐述一个论点或将一个概念置于“适当的普遍性”中, 我们不仅可以加强结论和拓宽适用性, 而且可以更清晰地察觉数学概念中真正重要的部分.</p>
+<p>毫不夸张地说, 现代代数 (尤其是范畴代数) 的发展驱动力来源于提取数学结构的本质并置于公理化的一般框架中的需求. 这对诸如拓扑斯, 阿贝尔范畴, 概形, 上同调理论和其他无数概念都是正确的.</p>
+<p>寻找概念的“正确”推广 (而不仅仅是极大推广) 是一个辩证的过程, 严格逻辑意义上的一般化程度必须与简单性, 易用性, 启发性, 优美程度等其他因素相平衡. 对概念坚持不懈地打磨后, 一个集中了良好选择的定义的理论形成了, 关键结论从这些定义中自然地产生.</p>
+<p>在数学 (和物理学等) 的历史上, 抽象的推动力偶尔会受到质疑. 在某种程度上这可能是一种代际效应, 观念的转变和重新学习学科基础的压力可能会遭到长期习惯于陈旧观点的数学家的抵制. 另一种观点认为, 为了推广而推广是一项枯燥无味的工作, 因此典型的相对反应就是进一步的抽象应该“证明它们自己”, 例如能够解决古老的问题.<br><a id="more"></a></p>
+<h1 id="抽象的模式"><a href="#抽象的模式" class="headerlink" title="抽象的模式"></a>抽象的模式</h1><p>蜈蚣数学是指在不完全破坏某个现存数学概念功能的前提下删除其定义中的组成部分而形成的数学. Steven Krantz 将该词的产生归于 Antoni Zygmund. 引自 <a href="http://books.google.com/books?id=LMC5UeaStKwC&amp;pg=PA6&amp;lpg=PA6&amp;dq=%22centipede+mathematics%22&amp;source=bl&amp;ots=aivICIZzMU&amp;sig=2rMkg3u6tMhjQyfI-C46BZThiyk&amp;hl=en&amp;ei=kF46Ss_vC4yMsgPb0JD-Bg&amp;sa=X&amp;oi=book_result&amp;ct=result&amp;resnum=9" target="_blank" rel="noopener">Mathematical Apocrypha Redux</a>:“你将一个蜈蚣 (译注: 也可译作百足虫) 的 99 条腿拔掉, 看看它能做什么.”(我们不建议对真的蜈蚣这么做, 除非它是一个<a href="http://www.washingtonpost.com/wp-dyn/content/article/2007/05/05/AR2007050501009.html?hpid=topnews" target="_blank" rel="noopener">扫雷机器人</a>.)</p>
+<p>例如, 我们从交换群的概念开始, 并尝试删除其中的一部分东西:</p>
+<ul>
+<li>删除交换律可以获得群;</li>
+<li>接着, 删除逆元可以获得幺半群;</li>
+<li>或者, 不删除逆元, 而删除结合律可以获得幺拟群;</li>
+<li>等等 (参见群的条目).</li>
+</ul>
+<p>什么仍然起作用? 阿贝尔群构成阿贝尔范畴, 但群只构成半阿贝尔范畴, 因此上同调变得更加复杂 (参见非阿贝列上同调的条目), 但仍然有意义. 幺半群表示 (例如在向量空间上) 和群表示一样有意义, 但幺拟群表示没有显然的意义. (但就像非阿贝尔上同调一样, 也许有一天有人会使它们变得有意义.) 描述幺半群的同态和表现要比描述群的情况更加小心, 但简单的定义仍然适用于幺拟群. 有时事情会变得更好; 群对象仅在笛卡尔幺半范畴中有意义, 而幺半群对象在任何幺半范畴中都有意义. 通过研究使上同调和表示论这类事务变得有意义的特征, 我们发现我们可以概括这些特征, 这并不是简单地从群的定义中删除内容, 而是将概念重新加工为诸如范畴或量子群的概念.</p>
+<p>蜈蚣数学在有关数学基础的中常被称为反推数学. 此时, 我们删除集合论 (或其他形式的基础) 中的一些公理, 并考虑哪些定理仍然能够被证明, 哪些定理能够在重新构造成 (显然的) 古典等价形式后被证明，哪些定理完全失效了 (它们在理想情况下应该被证明). 在 Lab (译注: 指该网站), 我们中的一些人为了构造性数学而常这样做, 但这对内化也很重要. (主流的反推数学更多地与直谓数学和高阶算术子系统相关, 而不是这两种数学.)</p>
+<p>和“一般的抽象废话”(译注: 指范畴论) 一样, “蜈蚣数学”一词既可以是半开玩笑的, 也可以是贬义的. 当然, 证明诸如“偏亚半连续函数是莱布尼兹可积的.”的孤立定理对从没有真正需要以该限制性方式对该类一般函数进行积分的人来说是毫无价值的 (此处的两个术语都是编造的, 以免侮辱任何现实生活中无用定理的创造者). 但有时, 思考什么才是真正必要的会为真正卓有成效的一般化指明道路; 如同数学中的每一个判断, 良好的品味是必需的.</p>
+<h1 id="引例"><a href="#引例" class="headerlink" title="引例"></a>引例</h1><p>引自 <a href="https://ncatlab.org/nlab/show/Lawvere" target="_blank" rel="noopener">Lawvere</a>, 在 <a href="https://ncatlab.org/nlab/show/abstraction#picado" target="_blank" rel="noopener">An interview with F. William Lawvere</a> 中:</p>
+<blockquote>
+<p>对不断发展的数学的本质进行总结的基本工具是什么? 代数! 当我们用有限个公理表示范畴的元范畴时, 我们所知道的一切都可以表示为一种代数, 这类研究就产生了节点. 我很自豪能与 Eilenberg, Mac Lane, Freyd 以及许多其他人一起带来将当代代数作为范畴论的意识.</p>
+</blockquote>
+<p>引自 <a href="https://ncatlab.org/nlab/show/abstraction#reid" target="_blank" rel="noopener">Miles Reid</a>, p. 123:</p>
+<blockquote>
+<p>当时的许多学生显然想不出比研究 EGAs 还高的志向了. 对范畴理论本身的研究 (当然这是所有对智力的追求中最枯燥无味的一个) 也可以追溯到这个时期; Grothendieck 不应该因此受到指责, 因为他能很成功地使用范畴解决问题.</p>
+</blockquote>
+<p>引自 <a href="https://ncatlab.org/nlab/show/Tom+Leinster" target="_blank" rel="noopener">Tom Leinster</a>, 原引自 Reid , <a href="https://ncatlab.org/nlab/show/abstraction#leinster" target="_blank" rel="noopener">Leinster2010</a>:</p>
+<blockquote>
+<p>我很喜欢这句话，虽然不是出于 Reid 的本意. “Sterile”不仅意味着不肥沃或无生产力. 它同时也是对你想要的手术器械的要求: 干净, 无污染, 无疾病. 没有人愿意被脏手术刀做手术.</p>
+<p>我要澄清这一点, 因为我能听到一个讽刺的声音说: “哦, 所以你想做的范畴论是不受实际数学污染的”. 我认为, 范畴论作为数学中的数学在其最佳状态发挥作用时, 不仅能反映数学家的实际工作, 而且能展示如何做得更好.</p>
+</blockquote>
+<p>引自 <a href="https://ncatlab.org/nlab/show/Categories+for+the+Working+Mathematician" target="_blank" rel="noopener">Categories for the Working Mathematician</a>, p. 108:</p>
+<blockquote>
+<p>人们可以推测为什么伴随函子的发现如此之晚. (…) Bourbaki 只不过错过了. (…) Bourbaki 的通用构造的思想被设计得如此一般化以至于包含了更多 (比找到左伴随更为广泛的问题). (…) (他的)公式缺乏伴随问题的对称性, 因此错过一个基本的发现; 这一发现留给了一个更年轻的人, 也许这个人对传统或流行不那么感激. 换句话说, 好的一般性理论不是寻找最大程度的推广, 而是寻找正确的推广.</p>
+</blockquote>
+<h1 id="译后记"><a href="#译后记" class="headerlink" title="译后记"></a>译后记</h1><p>译者首次接触较为抽象的数学是本科内容的抽象代数 (群和交换环简介), 学习时被其抽象凝练的特点及其具有的普遍适用性折服. 自此以后, 译者又学习了群论, 非交换环论和模论, 格论, 半群理论, 准环理论, 系理论等一系列代数结构理论, 伴随着结构所需假设的减少, 结论的一般化程度在增强, 而优雅程度也在减弱. 虽然译者早已知道一部分数学工作者对具有“semi-”, “hemi-”, “demi-” , “quasi-”, “near-”, “pseudo-”, “para-”等词头的数学结构颇有微词, 但译者在阅读此文时发现了<em>蜈蚣数学 (Centipede mathematics)</em> 这一颇具调侃意味的名称时仍惊讶了一番, 惊讶之余翻译了此文与大家共享. 由于译者的水平有限, 译文的缺点和错误在所难免, 真诚地希望读者批评指正.</p>
+<h1 id="原文"><a href="#原文" class="headerlink" title="原文"></a>原文</h1><h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>Abstraction or generalization is a basic tactic in mathematics research. By formulating an argument or placing a concept in ‘proper generality’, one not only strengthens results and widens applicability, but one also perceives much more clearly what is truly at stake within the sphere of concepts where the mathematics takes place.</p>
+<p>Without too much of an exaggeration, one could say that the development of modern algebra generally, and categorical algebra in particular, has been driven by the need to extract the essence of mathematical structures and situate them within axiomatic frameworks of general type. This is certain true of such concepts as topos, abelian category, scheme, cohomology theory, and countless others.</p>
+<p>Finding the ‘right’ generality (as opposed to merely maximal generality) of concepts is a kind of dialectical process, in which generality in the strictly logical sense must be balanced against other considerations such as simplicity, ease of application, suggestiveness, aesthetics, etc. The result of such persistent conceptual polishing is often a theory that becomes concentrated in its well-chosen definitions, from which key summary results flow naturally.</p>
+<p>Occasionally throughout the history of mathematics (and physics, etc.), the drive to abstraction has met with suspicion. To some extent this may be a generational phenomenon, where shifting conceptual landscapes and pressure to relearn the foundations of a subject may meet with resistance from mathematicians long accustomed to older insights. There can also be justice in the charge that generality for the sake of generality is a sterile pursuit, and a typical counter-reaction is that further layers of abstraction should “prove themselves”, e.g., by leading to solutions of venerable problems.</p>
+<h2 id="Styles-of-abstraction"><a href="#Styles-of-abstraction" class="headerlink" title="Styles of abstraction"></a>Styles of abstraction</h2><p>Centipede mathematics is where you take an extant mathematical concept and see how many parts you can strip away without completely destroying its ability to function properly. Steven Krantz has attributed this term to Antoni Zygmund. From Mathematical Apocrypha Redux: ‘You take a centipede and pull off ninety-nine of its legs and see what it can do.’ (We do not recommend doing this to an actual centipede, unless it is a land-mine destroying robot.)</p>
+<p>For example, you can start with the concept of abelian group and try removing some things:</p>
+<ul>
+<li>remove commutativity to get groups;</li>
+<li>then remove inverses to get monoids;</li>
+<li>or remove associativity instead of inverses to get loops;</li>
+<li>etc (see group for more).</li>
+</ul>
+<p>What still works? Abelian groups form an abelian category, while groups only form a semi-abelian category, so cohomology gets more complicated (see nonabelian cohomology) but still makes sense. Monoid representations (say on vector spaces) make as much sense as group representations, but loop representations are not apparently meaningful. (But like nonabelian cohomology, maybe somebody will make sense of them some day.) Describing homomorphisms and presentations of monoids takes a little more care than for groups, while the naïve definitions continue to work for loops. Sometimes things actually work better; group objects make sense only in a cartesian monoidal category, while monoid objects make sense in any monoidal category. By seeing what are the salient features for making sense of things like cohomology and representation theory, we also see that we can generalise these, not by simply removing clauses from the definition of group, but by reworking the concept into such things as categories or quantum groups.</p>
+<p>Centipede mathematics in the context of foundations is often called reverse mathematics. Here we remove axioms from set theory (or some other form of foundations) and consider what theorems can still be proved, which can be proved if reformulated into (obviously) classically equivalent forms, and which are lost entirely (ideally provably so). On the Lab, some of us like to do this for constructive mathematics, but it is also important for internalization. (Mainstream reverse mathematics has more to do with predicative mathematics than with either of these and works with subsystems of higher-order arithmetic.)</p>
+<p>Like ‘general abstract nonsense’, the term ‘centipede mathematics’ can vary from tongue-in-cheek to derogatory. Certainly there is little value in proving isolated theorems like ‘Hemidemisemicontinuous functions are Leibniz-integrable.’ when one never really needs to integrate such general functions in such a restrictive way (both terms here are made up, to avoid insulting the creators of any real-life useless theorems). But sometimes thinking about what is really necessary points the way to really fruitful generalisations; like every judgement in mathematics, good taste is required.</p>
+<h2 id="Illustrative-quotes"><a href="#Illustrative-quotes" class="headerlink" title="Illustrative quotes"></a>Illustrative quotes</h2><p>From Lawvere, in An interview with F. William Lawvere:</p>
+<blockquote>
+<p>What is the primary tool for such summing up of the essence of ongoing mathematics? Algebra! Nodal points in the progress of this kind of research occur when, as in the case with the finite number of axioms for the metacategory of categories, all that we know so far can be expressed in a single sort of algebra. I am proud to have participated with Eilenberg, Mac Lane, Freyd, and many others, in bringing about the contemporary awareness of Algebra as Category Theory.</p>
+</blockquote>
+<p>From Miles Reid, p. 123:</p>
+<blockquote>
+<p>Many students of the time could apparently not think of any higher ambition than Étudier les EGAs. The study of category theory for its own sake (surely one of the most sterile of all intellectual pursuits) also dates from this time; Grothendieck himself can’t necessarily be blamed for this, since his own use of categories was very successful in solving problems.</p>
+</blockquote>
+<p>From Tom Leinster, referring to the quotation from Reid, Leinster2010:</p>
+<blockquote>
+<p>I’ve become rather fond of that quotation, though not for the reason that Reid intended. ‘Sterile’ doesn’t only mean infertile or unproductive. It’s also what you want surgical instruments to be: clean, uncontaminated, disease-free. No one wants to be operated on with a dirty scalpel.</p>
+<p>I’m going to clarify that point, because I can hear a sarcastic voice saying ‘oh, so you want to do category theory uncontaminated by real mathematics’. Category theory is at its best, I think, when it reflects what mathematicians actually do and shows how to do it better, when it functions as the mathematics of mathematics.</p>
+</blockquote>
+<p>From Categories for the Working Mathematician, p. 108:</p>
+<blockquote>
+<p>One may speculate as to why the discovery of adjoint functors was so delayed. (…) Bourbaki just missed… Bourbaki’s idea of universal construction was devised to be so general as to include more [than the problem of finding a left adjoint] … [his] formulation lacks the symmetry of the adjunction problem … and so missed a basic discovery; this discovery was left to a younger man, perhaps one less beholden to tradition or to fashion. Put differently, good general theory does not search for the maximum generality, but for the right generality.</p>
+</blockquote>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/数学/" rel="tag"># 数学</a>
+          
+            <a href="/tags/译作/" rel="tag"># 译作</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Lonicera">
+            
+              <p class="site-author-name" itemprop="name">Lonicera</p>
+              <p class="site-description motion-element" itemprop="description">Pour l'honneur de l'esprit humain</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">1</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                    <span class="site-state-item-count">1</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">2</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/loniceras" title="GitHub &rarr; https://github.com/loniceras" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:lonicera@stu.cpu.edu.cn" title="E-Mail &rarr; mailto:lonicera@stu.cpu.edu.cn" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://www.zhihu.com/people/zhi-zi-ren-dong" title="ZhiHu &rarr; https://www.zhihu.com/people/zhi-zi-ren-dong" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>ZhiHu</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://www.weibo.com/2890043134" title="Weibo &rarr; https://www.weibo.com/2890043134" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                </span>
+              
+            </div>
+          
+
+          
+             <div class="cc-license motion-element" itemprop="license">
+              
+                
+              
+              
+              
+              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+             </div>
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#介绍"><span class="nav-number">1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#抽象的模式"><span class="nav-number">2.</span> <span class="nav-text">抽象的模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#引例"><span class="nav-number">3.</span> <span class="nav-text">引例</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#译后记"><span class="nav-number">4.</span> <span class="nav-text">译后记</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#原文"><span class="nav-number">5.</span> <span class="nav-text">原文</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-number">5.1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Styles-of-abstraction"><span class="nav-number">5.2.</span> <span class="nav-text">Styles of abstraction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Illustrative-quotes"><span class="nav-number">5.3.</span> <span class="nav-text">Illustrative quotes</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lonicera</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.0.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.0"></script>
+
+  <script src="/js/src/motion.js?v=7.0.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=7.0.0"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=7.0.0"></script>
+
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.0"></script>
+<script src="/js/src/post-details.js?v=7.0.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=7.0.0"></script>
+
+
+
+  
+  
+
+<script src="//cdn1.lncld.net/static/js/3.11.1/av-min.js"></script>
+
+
+
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+
+<script>
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail';
+  guest = guest.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'fW8Q59TXroaIRRLwgNLooP20-gzGzoHsz',
+    appKey: 'Pik2UIRW4DzqcD30VVDxbHtN',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: true
+  });
+</script>
+
+
+
+
+  
+
+
+  
+
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
