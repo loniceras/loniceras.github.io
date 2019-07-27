@@ -99,8 +99,8 @@ creative_commons:
 
 # `Follow me on GitHub` banner in the top-right corner.
 github_banner:
-  enable: false
-  permalink: https://github.com/yourname
+  enable: true
+  permalink: https://github.com/loniceras
   title: Follow me on GitHub
 
 
@@ -159,9 +159,9 @@ baidu_push: false
 menu:
   home: / || home
   #about: /about/ || user
-  tags: /tags/ || tags
-  categories: /categories/ || th
   archives: /archives/ || archive
+  categories: /categories/ || th
+  tags: /tags/ || tags
   #schedule: /schedule/ || calendar
   #sitemap: /sitemap.xml || sitemap
   #commonweal: /404/ || heartbeat
@@ -197,10 +197,11 @@ site_state: true
 # Value before `||` delimeter is the target permalink.
 # Value after `||` delimeter is the name of FontAwesome icon. If icon (with or without delimeter) is not specified, globe icon will be loaded.
 social:
-  GitHub: https://github.com/loniceras || github
+  #GitHub: https://github.com/loniceras || github
   E-Mail: mailto:lonicera@stu.cpu.edu.cn || envelope
-  ZhiHu: https://www.zhihu.com/people/zhi-zi-ren-dong || 
   Weibo: https://weibo.com/2890043134 || weibo
+  ZhiHu: https://www.zhihu.com/people/zhi-zi-ren-dong || cube
+  Douban: https://www.douban.com/people/141574328 || book
   #Google: https://plus.google.com/yourname || google
   #Twitter: https://twitter.com/yourname || twitter
   #FB Page: https://www.facebook.com/yourname || facebook
