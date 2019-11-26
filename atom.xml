@@ -14,12 +14,12 @@
     
   </author>
   
-  <generator uri="http://hexo.io/">Hexo</generator>
+  <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
     <title>如何理解模格?</title>
     <link href="http://loniceras.github.io/2019/10/23/%E7%90%86%E8%A7%A3%E6%A8%A1%E6%A0%BC/"/>
-    <id>http://loniceras.github.io/2019/10/23/理解模格/</id>
+    <id>http://loniceras.github.io/2019/10/23/%E7%90%86%E8%A7%A3%E6%A8%A1%E6%A0%BC/</id>
     <published>2019-10-23T09:15:38.000Z</published>
     <updated>2019-10-30T08:21:05.456Z</updated>
     
@@ -31,6 +31,7 @@
     
     </summary>
     
+    
       <category term="数学" scheme="http://loniceras.github.io/categories/%E6%95%B0%E5%AD%A6/"/>
     
     
@@ -41,7 +42,7 @@
   <entry>
     <title>浅谈“抽象”</title>
     <link href="http://loniceras.github.io/2019/05/02/%E6%B5%85%E8%B0%88%E6%8A%BD%E8%B1%A1/"/>
-    <id>http://loniceras.github.io/2019/05/02/浅谈抽象/</id>
+    <id>http://loniceras.github.io/2019/05/02/%E6%B5%85%E8%B0%88%E6%8A%BD%E8%B1%A1/</id>
     <published>2019-05-02T08:55:44.000Z</published>
     <updated>2019-10-23T09:51:41.863Z</updated>
     
@@ -56,6 +57,7 @@
 &lt;p&gt;在数学 (和物理学等) 的历史上, 抽象的推动力偶尔会受到质疑. 在某种程度上这可能是一种代际效应, 观念的转变和重新学习学科基础的压力可能会遭到长期习惯于陈旧观点的数学家的抵制. 另一种观点认为, 为了推广而推广是一项枯燥无味的工作, 因此典型的相对反应就是进一步的抽象应该“证明它们自己”, 例如能够解决古老的问题.&lt;br&gt;
     
     </summary>
+    
     
       <category term="数学" scheme="http://loniceras.github.io/categories/%E6%95%B0%E5%AD%A6/"/>
     
