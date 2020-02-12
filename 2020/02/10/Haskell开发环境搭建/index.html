@@ -50,30 +50,32 @@
   };
 </script>
 
-  <meta name="description" content="Pour l&amp;apos;honneur de l&amp;apos;esprit humain">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Lonicera&#39;s Blog">
-<meta property="og:url" content="http:&#x2F;&#x2F;loniceras.github.io&#x2F;index.html">
+  <meta name="description" content="介绍本文是在 Windows 10 操作系统下使用 Stack 搭建基于 Haskell IDE Engine ( HIE ) 的 VSCode 开发环境的介绍. Stack ( GitHub页面 ) 是用于开发 Haskell 的一个交互平台, 可以用于安装 Haskell 的编译器和各种库, 也可以用于构建和测试项目. Stack 对库的版本管理一定程度上依赖于解析器的选择, 解析器支持 LT">
+<meta name="keywords" content="编程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Haskell开发环境搭建">
+<meta property="og:url" content="http:&#x2F;&#x2F;loniceras.github.io&#x2F;2020&#x2F;02&#x2F;10&#x2F;Haskell%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA&#x2F;index.html">
 <meta property="og:site_name" content="Lonicera&#39;s Blog">
-<meta property="og:description" content="Pour l&amp;apos;honneur de l&amp;apos;esprit humain">
+<meta property="og:description" content="介绍本文是在 Windows 10 操作系统下使用 Stack 搭建基于 Haskell IDE Engine ( HIE ) 的 VSCode 开发环境的介绍. Stack ( GitHub页面 ) 是用于开发 Haskell 的一个交互平台, 可以用于安装 Haskell 的编译器和各种库, 也可以用于构建和测试项目. Stack 对库的版本管理一定程度上依赖于解析器的选择, 解析器支持 LT">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-02-12T10:39:44.609Z">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://loniceras.github.io/">
+<link rel="canonical" href="http://loniceras.github.io/2020/02/10/Haskell%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome: true,
-    isPost: false,
+    isHome: false,
+    isPost: true,
     isPage: false,
     isArchive: false
   };
 </script>
 
-  <title>Lonicera's Blog</title>
+  <title>Haskell开发环境搭建 | Lonicera's Blog</title>
   
 
 
@@ -206,10 +208,10 @@
             
 
   <div class="posts-expand">
-        
+      
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://loniceras.github.io/2020/02/10/Haskell%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -223,8 +225,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/02/10/Haskell%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" class="post-title-link" itemprop="url">Haskell开发环境搭建</a>
+          Haskell开发环境搭建
         </h1>
 
         <div class="post-meta">
@@ -287,236 +288,38 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>本文是在 Windows 10 操作系统下使用 <a href="https://docs.haskellstack.org/en/stable/README/" target="_blank" rel="noopener">Stack</a> 搭建基于 <a href="https://github.com/haskell/haskell-ide-engine" target="_blank" rel="noopener">Haskell IDE Engine</a> ( HIE ) 的 VSCode 开发环境的介绍. Stack ( <a href="https://github.com/commercialhaskell/stack" target="_blank" rel="noopener">GitHub页面</a> ) 是用于开发 Haskell 的一个交互平台, 可以用于安装 Haskell 的编译器和各种库, 也可以用于构建和测试项目. Stack 对库的版本管理一定程度上依赖于<a href="https://docs.haskellstack.org/en/stable/yaml_configuration/#resolver" target="_blank" rel="noopener">解析器</a>的选择, 解析器支持 <a href="https://github.com/commercialhaskell/lts-haskell" target="_blank" rel="noopener">LTS 快照</a>, <a href="https://github.com/commercialhaskell/stackage-nightly" target="_blank" rel="noopener">Stackage Nightly快照</a>等多种格式对版本进行指定, 一个快照下的一个库只能拥有一个版本号, 可在 <a href="https://www.stackage.org/" target="_blank" rel="noopener">Stackage 网站</a>上查询不同 GHC 对应的最新 LTS 快照. 更多有关 Stack 的教程可以参考<a href="https://github.com/commercialhaskell/stack/blob/master/doc/GUIDE.md" target="_blank" rel="noopener">用户文档</a>. HIE 是一个针对不断增长的 Haskell 工具的一个通用接口, 它为编辑器和 IDE 提供了功能齐全的语言服务器协议服务, HIE 目前支持的最低 Stack 版本为 2.1.1, 它仍然在不断开发中.<br>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/02/10/Haskell%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
+        <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>本文是在 Windows 10 操作系统下使用 <a href="https://docs.haskellstack.org/en/stable/README/" target="_blank" rel="noopener">Stack</a> 搭建基于 <a href="https://github.com/haskell/haskell-ide-engine" target="_blank" rel="noopener">Haskell IDE Engine</a> ( HIE ) 的 VSCode 开发环境的介绍. Stack ( <a href="https://github.com/commercialhaskell/stack" target="_blank" rel="noopener">GitHub页面</a> ) 是用于开发 Haskell 的一个交互平台, 可以用于安装 Haskell 的编译器和各种库, 也可以用于构建和测试项目. Stack 对库的版本管理一定程度上依赖于<a href="https://docs.haskellstack.org/en/stable/yaml_configuration/#resolver" target="_blank" rel="noopener">解析器</a>的选择, 解析器支持 <a href="https://github.com/commercialhaskell/lts-haskell" target="_blank" rel="noopener">LTS 快照</a>, <a href="https://github.com/commercialhaskell/stackage-nightly" target="_blank" rel="noopener">Stackage Nightly快照</a>等多种格式对版本进行指定, 一个快照下的一个库只能拥有一个版本号, 可在 <a href="https://www.stackage.org/" target="_blank" rel="noopener">Stackage 网站</a>上查询不同 GHC 对应的最新 LTS 快照. 更多有关 Stack 的教程可以参考<a href="https://github.com/commercialhaskell/stack/blob/master/doc/GUIDE.md" target="_blank" rel="noopener">用户文档</a>. HIE 是一个针对不断增长的 Haskell 工具的一个通用接口, 它为编辑器和 IDE 提供了功能齐全的语言服务器协议服务, HIE 目前支持的最低 Stack 版本为 2.1.1, 它仍然在不断开发中.<br><a id="more"></a></p>
+<h1 id="配置-Stack"><a href="#配置-Stack" class="headerlink" title="配置 Stack"></a>配置 Stack</h1><p>从 <a href="https://docs.haskellstack.org/en/stable/install_and_upgrade/#windows" target="_blank" rel="noopener">Stack 官网</a> 下载 Stack 的安装包并进行安装. 安装完毕后, 以管理员身份运行 CMD , 执行 <code>stack setup</code> , 直至生成 <code>C:\sr\config.yaml</code>. 随后打断 CMD 的操作, 在 <code>config.yaml</code> 文件中进行换源, 可以使用的 Hackage 镜像有:<br><a href="https://mirrors.tuna.tsinghua.edu.cn/help/hackage/" target="_blank" rel="noopener">https://mirrors.tuna.tsinghua.edu.cn/help/hackage/</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">package-indices:</span><br><span class="line">  - download-prefix: http://mirrors.tuna.tsinghua.edu.cn/hackage/</span><br><span class="line">  hackage-security:</span><br><span class="line">    keyids:</span><br><span class="line">    - 0a5c7ea47cd1b15f01f5f51a33adda7e655bc0f0b0615baa8e271f4c3351e21d</span><br><span class="line">    - 1ea9ba32c526d1cc91ab5e5bd364ec5e9e8cb67179a471872f6e26f0ae773d42</span><br><span class="line">    - 280b10153a522681163658cb49f632cde3f38d768b736ddbc901d99a1a772833</span><br><span class="line">    - 2a96b1889dc221c17296fcc2bb34b908ca9734376f0f361660200935916ef201</span><br><span class="line">    - 2c6c3627bd6c982990239487f1abd02e08a02e6cf16edb105a8012d444d870c3</span><br><span class="line">    - 51f0161b906011b52c6613376b1ae937670da69322113a246a09f807c62f6921</span><br><span class="line">    - 772e9f4c7db33d251d5c6e357199c819e569d130857dc225549b40845ff0890d</span><br><span class="line">    - aa315286e6ad281ad61182235533c41e806e5a787e0b6d1e7eef3f09d137d2e9</span><br><span class="line">    - fe331502606802feac15e514d9b9ea83fee8b6ffef71335479a2e68d84adc6b0</span><br><span class="line">    key-threshold: 3 # number of keys required</span><br><span class="line"></span><br><span class="line">    # ignore expiration date, see https://github.com/commercialhaskell/stack/pull/4614</span><br><span class="line">    ignore-expiry: no</span><br></pre></td></tr></table></figure><br><a href="https://docs.haskellstack.org/en/stable/yaml_configuration/#package-indices" target="_blank" rel="noopener">https://docs.haskellstack.org/en/stable/yaml_configuration/#package-indices</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">package-indices:</span><br><span class="line">- download-prefix: https://hackage.haskell.org/</span><br><span class="line">  hackage-security:</span><br><span class="line">    keyids:</span><br><span class="line">    - 0a5c7ea47cd1b15f01f5f51a33adda7e655bc0f0b0615baa8e271f4c3351e21d</span><br><span class="line">    - 1ea9ba32c526d1cc91ab5e5bd364ec5e9e8cb67179a471872f6e26f0ae773d42</span><br><span class="line">    - 280b10153a522681163658cb49f632cde3f38d768b736ddbc901d99a1a772833</span><br><span class="line">    - 2a96b1889dc221c17296fcc2bb34b908ca9734376f0f361660200935916ef201</span><br><span class="line">    - 2c6c3627bd6c982990239487f1abd02e08a02e6cf16edb105a8012d444d870c3</span><br><span class="line">    - 51f0161b906011b52c6613376b1ae937670da69322113a246a09f807c62f6921</span><br><span class="line">    - 772e9f4c7db33d251d5c6e357199c819e569d130857dc225549b40845ff0890d</span><br><span class="line">    - aa315286e6ad281ad61182235533c41e806e5a787e0b6d1e7eef3f09d137d2e9</span><br><span class="line">    - fe331502606802feac15e514d9b9ea83fee8b6ffef71335479a2e68d84adc6b0</span><br><span class="line">    key-threshold: 3 # number of keys required</span><br><span class="line"></span><br><span class="line">    # ignore expiration date, see https://github.com/commercialhaskell/stack/pull/4614</span><br><span class="line">    ignore-expiry: true</span><br></pre></td></tr></table></figure><br>换源完成后, 继续执行 <code>stack setup</code>. 初始化完成后使用 <code>stack update</code> 更新 <code>index.tar.gz</code> 文件. 更新该文件时可能会发生哈希检验错误, 参考 <a href="https://github.com/commercialhaskell/stack/issues/3052" target="_blank" rel="noopener">#3052</a> 和 <a href="https://github.com/commercialhaskell/stack/issues/3771" target="_blank" rel="noopener">#3771</a>, 反复进行删除 <code>C:\sr\pantry\hackage</code> 下的文件并再次执行 <code>stack update</code> 的操作直至成功为止. 如果该错误始终无法解决, 可以尝试使用别的镜像源. 在使用第二个镜像源时, 使用代理可加快下载速度. 以 SSR 代理的默认端口为例, 在 CMD 中执行 <code>set http_proxy=http://127.0.0.1:1080</code> 和 <code>set https_proxy=http://127.0.0.1:1080</code>. 注意只能在 CMD 中设置, 此法对 Powershell 无效.</p>
+<h1 id="配置-HIE"><a href="#配置-HIE" class="headerlink" title="配置 HIE"></a>配置 HIE</h1><p>新建一个短路径 ( 如 <code>C:\hie</code> ) 用于克隆 HIE 仓库, 若要选择长路径可参考<a href="https://github.com/haskell/haskell-ide-engine#windows-specific-pre-requirements" target="_blank" rel="noopener">此处</a>. 克隆是通过递归子模块的方式进行的: <code>git clone https://github.com/haskell/haskell-ide-engine --recurse-submodules</code>. 克隆完成后, 可通过 <code>stack ./install.hs help</code> 查看操作指南, 此过程需要等待一段时间以安装一些必要文件. 等出现操作指南后, 可使用 <code>stack ./install.hs hie-8.6.5</code> 进行安装 HIE. 笔者没有采用 <code>stack ./install.hs hie</code> 进行安装, 若选择此项则安装的是支持当前最新的 GHC 版本 GHC 8.8.2 的 HIE. 在安装 HIE 过程中安装 <code>network</code> 库时可能出现拒绝许可的错误, 参考 <a href="https://github.com/commercialhaskell/stack/issues/5014" target="_blank" rel="noopener">#5014</a>, 可尝试将 CMD 的字符编码改为 utf-8 进行解决, 即在 CMD 中输入 <code>chcp 65001</code> 后继续执行 <code>stack ./install.hs hie-8.6.5</code>. 安装完成后, 在 VSCode 中安装 <code>Haskell Language Server</code> 插件. HIE 支持在悬停状态下从 haddock 中获取文档, 这一功能需要使用到 <code>hoogle</code> 数据库, 根据<a href="https://github.com/haskell/haskell-ide-engine#docs-on-hovercompletion" target="_blank" rel="noopener">文档</a>说明, 可以在 <code>C:\hie</code> 下使用 <code>stack --stack-yaml=stack-8.6.5.yaml exec hoogle generate</code> 来生成 <code>hoogle</code> 数据库. 现在使用 VSCode 打开一个使用 Stack 构建的项目文件夹时, 便能体验基于 HIE 的开发环境. 打开一个 <code>hs</code> 文件, 在 HIE 初始化的过程中, 可能会产生 <a href="https://github.com/haskell/haskell-ide-engine/issues/1616" target="_blank" rel="noopener">#1616</a> 错误, 可以通过先 <code>stack build</code> 整个项目文件, 再在 VSCode 中打开 <code>hs</code> 文件来解决.</p>
+<h1 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h1><p>笔者根据该<a href="https://github.com/bitemyapp/learnhaskell/blob/master/guide-zh_CN.md" target="_blank" rel="noopener">建议</a>选择使用 Stack 代替 Haskell Platform 进行 GHC 和库的管理, 便有了这次重新搭建开发环境的尝试. 中文社区基本没有可用的博客和说明, 大都语焉不详或早已过时. 尽管笔者仔细参考了官方文档, 在这次配置过程中仍踩了很多很多很多很多很多很多的坑, 但经过不断查阅社区资料后最终还是配置成功了. 笔者从多而繁杂的解决过程中选择了一些简单明了的方案总结在此文中, 希望能为同好们节省尝试的时间.</p>
+
     </div>
 
     
     
     
+
       <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
+          <div class="post-tags">
+              <a href="/tags/%E7%BC%96%E7%A8%8B/" rel="tag"># 编程</a>
+          </div>
 
         
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://loniceras.github.io/2019/10/23/%E7%90%86%E8%A7%A3%E6%A8%A1%E6%A0%BC/">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Lonicera">
-      <meta itemprop="description" content="Pour l'honneur de l'esprit humain">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Lonicera's Blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/10/23/%E7%90%86%E8%A7%A3%E6%A8%A1%E6%A0%BC/" class="post-title-link" itemprop="url">如何理解模格?</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-10-23 17:15:38" itemprop="dateCreated datePublished" datetime="2019-10-23T17:15:38+08:00">2019-10-23</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-10-30 16:21:05" itemprop="dateModified" datetime="2019-10-30T16:21:05+08:00">2019-10-30</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index">
-                    <span itemprop="name">数学</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2019/10/23/%E7%90%86%E8%A7%A3%E6%A8%A1%E6%A0%BC/" class="post-meta-item leancloud_visitors" data-flag-title="如何理解模格?" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2019/10/23/%E7%90%86%E8%A7%A3%E6%A8%A1%E6%A0%BC/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2019/10/23/%E7%90%86%E8%A7%A3%E6%A8%A1%E6%A0%BC/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="预备部分"><a href="#预备部分" class="headerlink" title="预备部分"></a>预备部分</h1><p>本文分为两个部分讨论模格, 第一部分考察模格的定义和动机并给出一些实例, 第二部分介绍模格的主要性质和结构定理. 记号约定: 格 $ (L,\leq) $, $ x \vee y = \sup \{x,y\} $, $ x \wedge y = \inf \{x,y\} $, $ [x,y]=\{\,z \in L\,|\,x \leq z \leq y\,\} $. 覆盖关系 $ \sqsubset $ 满足 $ x \sqsubset y $ 当且仅当 $ x&lt;y $ 且对任意 $ z \in L $ 都有 $ x \leq z \leq y $ 蕴涵 $ z=x $ 或 $ z=y $. $ {\sqsubseteq} = {\sqsubset} \cup {\varDelta_L} $, $ \varDelta_L $ 为 $ L $ 上的单位关系. 模的 (modular) : $ (\forall x,y,z \in L) \; x \leq y \rightarrow (x \vee z) \wedge y = x \vee (z \wedge y) $. 实际上, 由于对任意格 $ L $ 都有 $ (\forall x,y,z \in L) \; x \leq y \rightarrow (x \vee z) \wedge y \geq x \vee (z \wedge y) $, 因此模格的定义可以精炼为 $ (\forall x,y,z \in L) \; x \leq y \rightarrow (x \vee z) \wedge y \leq x \vee (z \wedge y) $.</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/10/23/%E7%90%86%E8%A7%A3%E6%A8%A1%E6%A0%BC/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/2019/10/23/%E7%90%86%E8%A7%A3%E6%A8%A1%E6%A0%BC/" rel="next" title="如何理解模格?">
+                  <i class="fa fa-chevron-left"></i> 如何理解模格?
+                </a>
             </div>
-          <!--/noindex-->
-        
-      
-    </div>
 
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
+            <span class="post-nav-divider"></span>
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://loniceras.github.io/2019/05/02/%E6%B5%85%E8%B0%88%E6%8A%BD%E8%B1%A1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Lonicera">
-      <meta itemprop="description" content="Pour l'honneur de l'esprit humain">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Lonicera's Blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/05/02/%E6%B5%85%E8%B0%88%E6%8A%BD%E8%B1%A1/" class="post-title-link" itemprop="url">浅谈“抽象”</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-05-02 16:55:44" itemprop="dateCreated datePublished" datetime="2019-05-02T16:55:44+08:00">2019-05-02</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-10-23 17:51:41" itemprop="dateModified" datetime="2019-10-23T17:51:41+08:00">2019-10-23</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index">
-                    <span itemprop="name">数学</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2019/05/02/%E6%B5%85%E8%B0%88%E6%8A%BD%E8%B1%A1/" class="post-meta-item leancloud_visitors" data-flag-title="浅谈“抽象”" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2019/05/02/%E6%B5%85%E8%B0%88%E6%8A%BD%E8%B1%A1/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2019/05/02/%E6%B5%85%E8%B0%88%E6%8A%BD%E8%B1%A1/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>本文译自 <a href="https://ncatlab.org/nlab/show/abstraction" target="_blank" rel="noopener">https://ncatlab.org/nlab/show/abstraction</a>.</p>
-<h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>抽象或一般化是数学研究的基本策略. 通过阐述一个论点或将一个概念置于“适当的普遍性”中, 我们不仅可以加强结论和拓宽适用性, 而且可以更清晰地察觉数学概念中真正重要的部分.</p>
-<p>毫不夸张地说, 现代代数 (尤其是范畴代数) 的发展驱动力来源于提取数学结构的本质并置于公理化的一般框架中的需求. 这对诸如拓扑斯, 阿贝尔范畴, 概形, 上同调理论和其他无数概念都是正确的.</p>
-<p>寻找概念的“正确”推广 (而不仅仅是极大推广) 是一个辩证的过程, 严格逻辑意义上的一般化程度必须与简单性, 易用性, 启发性, 优美程度等其他因素相平衡. 对概念坚持不懈地打磨后, 一个集中了良好选择的定义的理论形成了, 关键结论从这些定义中自然地产生.</p>
-<p>在数学 (和物理学等) 的历史上, 抽象的推动力偶尔会受到质疑. 在某种程度上这可能是一种代际效应, 观念的转变和重新学习学科基础的压力可能会遭到长期习惯于陈旧观点的数学家的抵制. 另一种观点认为, 为了推广而推广是一项枯燥无味的工作, 因此典型的相对反应就是进一步的抽象应该“证明它们自己”, 例如能够解决古老的问题.<br>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/05/02/%E6%B5%85%E8%B0%88%E6%8A%BD%E8%B1%A1/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
+            <div class="post-nav-prev post-nav-item">
             </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
+          </div>
       </footer>
+    
   </article>
   
   
@@ -524,12 +327,10 @@
 
   </div>
 
-  
-
-
 
           </div>
           
+    <div class="comments" id="comments"></div>
 
         </div>
           
@@ -554,6 +355,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#介绍"><span class="nav-number">1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#配置-Stack"><span class="nav-number">2.</span> <span class="nav-text">配置 Stack</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#配置-HIE"><span class="nav-number">3.</span> <span class="nav-text">配置 HIE</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#后记"><span class="nav-number">4.</span> <span class="nav-text">后记</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -686,56 +488,6 @@
   
 
   
-      
-<script type="text/x-mathjax-config">
-    MathJax.Ajax.config.path['mhchem'] = '//cdn.jsdelivr.net/npm/mathjax-mhchem@3';
-
-  MathJax.Hub.Config({
-    tex2jax: {
-      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
-      processEscapes: true,
-      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-    },
-    TeX: {
-        extensions: ['[mhchem]/mhchem.js'],
-      equationNumbers: {
-        autoNumber: 'AMS'
-      }
-    }
-  });
-
-  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
-    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
-      if (data.display) {
-        var next = data.script.nextSibling;
-        while (next && next.nodeName.toLowerCase() === '#text') {
-          next = next.nextSibling;
-        }
-        if (next && next.nodeName.toLowerCase() === 'br') {
-          next.parentNode.removeChild(next);
-        }
-      }
-    });
-  });
-
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for (i = 0; i < all.length; i += 1) {
-      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
-      if (element.nodeName.toLowerCase() == 'li') {
-        element = element.parentNode;
-      }
-      element.classList.add('has-jax');
-    }
-  });
-</script>
-<script>
-  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
-    MathJax.Hub.Typeset();
-  }, window.MathJax);
-</script>
-
-    
 
   
 
