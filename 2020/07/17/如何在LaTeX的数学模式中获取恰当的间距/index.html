@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.5.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="介绍对于数学模式中间距的调整可以视作是对公式的精细调整的一部分, 这需要敏锐的观察和一定的审美. 了解 LaTeX 的数学模式中自动生成间距的机制对于调整公式内部间距是十分有益的, 而本文主要对此方面进行介绍, 并提出一些有关间距精细调整的建议, 可视作对该材料的补充. 本文原发于知乎.">
+<meta name="keywords" content="排版,LaTeX">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何在 LaTeX 的数学模式中获取恰当的间距?">
+<meta property="og:url" content="http:&#x2F;&#x2F;loniceras.github.io&#x2F;2020&#x2F;07&#x2F;17&#x2F;%E5%A6%82%E4%BD%95%E5%9C%A8LaTeX%E7%9A%84%E6%95%B0%E5%AD%A6%E6%A8%A1%E5%BC%8F%E4%B8%AD%E8%8E%B7%E5%8F%96%E6%81%B0%E5%BD%93%E7%9A%84%E9%97%B4%E8%B7%9D&#x2F;index.html">
+<meta property="og:site_name" content="Lonicera&#39;s Blog">
+<meta property="og:description" content="介绍对于数学模式中间距的调整可以视作是对公式的精细调整的一部分, 这需要敏锐的观察和一定的审美. 了解 LaTeX 的数学模式中自动生成间距的机制对于调整公式内部间距是十分有益的, 而本文主要对此方面进行介绍, 并提出一些有关间距精细调整的建议, 可视作对该材料的补充. 本文原发于知乎.">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-07-17T07:39:47.109Z">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://loniceras.github.io/2020/07/17/%E5%A6%82%E4%BD%95%E5%9C%A8LaTeX%E7%9A%84%E6%95%B0%E5%AD%A6%E6%A8%A1%E5%BC%8F%E4%B8%AD%E8%8E%B7%E5%8F%96%E6%81%B0%E5%BD%93%E7%9A%84%E9%97%B4%E8%B7%9D/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>如何在 LaTeX 的数学模式中获取恰当的间距? | Lonicera's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Lonicera's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Lonicera's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/loniceras" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://loniceras.github.io/2020/07/17/%E5%A6%82%E4%BD%95%E5%9C%A8LaTeX%E7%9A%84%E6%95%B0%E5%AD%A6%E6%A8%A1%E5%BC%8F%E4%B8%AD%E8%8E%B7%E5%8F%96%E6%81%B0%E5%BD%93%E7%9A%84%E9%97%B4%E8%B7%9D/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Lonicera">
+      <meta itemprop="description" content="Pour l'honneur de l'esprit humain">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lonicera's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          如何在 LaTeX 的数学模式中获取恰当的间距?
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-07-17 14:05:20 / 修改时间：15:39:47" itemprop="dateCreated datePublished" datetime="2020-07-17T14:05:20+08:00">2020-07-17</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8E%92%E7%89%88/" itemprop="url" rel="index">
+                    <span itemprop="name">排版</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2020/07/17/%E5%A6%82%E4%BD%95%E5%9C%A8LaTeX%E7%9A%84%E6%95%B0%E5%AD%A6%E6%A8%A1%E5%BC%8F%E4%B8%AD%E8%8E%B7%E5%8F%96%E6%81%B0%E5%BD%93%E7%9A%84%E9%97%B4%E8%B7%9D/" class="post-meta-item leancloud_visitors" data-flag-title="如何在 LaTeX 的数学模式中获取恰当的间距?" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/07/17/%E5%A6%82%E4%BD%95%E5%9C%A8LaTeX%E7%9A%84%E6%95%B0%E5%AD%A6%E6%A8%A1%E5%BC%8F%E4%B8%AD%E8%8E%B7%E5%8F%96%E6%81%B0%E5%BD%93%E7%9A%84%E9%97%B4%E8%B7%9D/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/07/17/%E5%A6%82%E4%BD%95%E5%9C%A8LaTeX%E7%9A%84%E6%95%B0%E5%AD%A6%E6%A8%A1%E5%BC%8F%E4%B8%AD%E8%8E%B7%E5%8F%96%E6%81%B0%E5%BD%93%E7%9A%84%E9%97%B4%E8%B7%9D/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>对于数学模式中间距的调整可以视作是对公式的精细调整的一部分, 这需要敏锐的观察和一定的审美. 了解 LaTeX 的数学模式中自动生成间距的机制对于调整公式内部间距是十分有益的, 而本文主要对此方面进行介绍, 并提出一些有关间距精细调整的建议, 可视作对<a href="https://zhuanlan.zhihu.com/p/19683504" target="_blank" rel="noopener">该材料</a>的补充. 本文原发于<a href="https://zhuanlan.zhihu.com/p/159488344" target="_blank" rel="noopener">知乎</a>.<br><a id="more"></a></p>
+<h1 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h1><p>我们知道, 在数学模式中所有用 space 键直接输入的空格都会被忽略. 如果希望插入空格, 则需要在空格前插入反斜杠号, 如 <script type="math/tex">a\ b</script>, 可强制在 a 与 b 中插入空格. 通常我们无需进行这一操作, 更多依赖于 LaTeX 对数学符号作用的识别来自动插入适当的间距. 而当 LaTeX 由于各种原因无法正确生成恰当的间距或者定义新的数学符号的时候, 我们就应该进行适当的操作使恰当的间距被生成.</p>
+<p>如下列表所示, 在 LaTeX 中的参与生成间距的符号分为 8 类, 括号内的指令为数学符号的类型声明方式.</p>
+<ul>
+<li>普通符 (Ord, <code>\mathord</code>) : 如 <code>0 a A \varGamma \gamma \aleph</code> 等, 包括上下划线, 重音以及根式.</li>
+<li>大型运算符 (Op, <code>\mathop</code>) : 如 <code>\int \sum \coprod \bigcup \bigvee \max</code> 等.</li>
+<li>二元运算符 (Bin, <code>\mathbin</code>) : 如 <code>+ \cdot \cup \cap \sqcup \vee \wedge</code> 等.</li>
+<li>关系符 (Rel, <code>\mathrel</code>) : 如 <code>= &lt; \leq \in \subseteq \prec \sim \rightarrow \mid</code> 等.</li>
+<li>开始符 (Open, <code>\mathopen</code>) : 如 <code>( [ \{ \lceil \lfloor \langle \lvert</code> 等.</li>
+<li>结束符 (Close, <code>\mathclose</code>) : 如 <code>) ] \} \rceil \rfloor \rangle \rvert</code> 等.</li>
+<li>标点符 (Punct, <code>\mathpunct</code>) : 如 <code>, . ; \cdot \ldot \ddot</code> 等 .</li>
+<li>内部符 (Inner, <code>\mathinner</code>) : 视作整体公式的子公式, 包括分式以及由 <code>\left</code> 和 <code>\right</code> 命令生成的公式片段.</li>
+</ul>
+<p>我们在下表中给出 LaTeX 中自动生成的空白宽度. 表的行标题为左侧符号, 列标题为右侧符号, 两者交汇处就是所插入间距的宽度. 其中, 0 表示不插入间距, 1 表示 thin space (即 <code>\,</code> ), 2 表示 medium space (即 <code>\:</code> ), 3 表示 thick space (即 <code>\;</code> ), * 表示不可能出现该情形 (此时通常会将 Bin 解释为 Ord, 细节参考 The TeXbook 的附录 G). 处于圆括号中的数字表示如果该情况使用 <code>\scriptstyle</code> (包括上下标, <code>\textstyle</code> 下的行内分式) 或 <code>\scriptscriptstyle</code> (包括上下标的上下标, <code>\textstyle</code> 下的行内分式的上下标) 样式则不插入间距. 事实上, 命令 <code>\mathord{}</code> 是不必要的, 我们使用 <code>{}</code> 可以更灵活地实现想要的效果, TeX 将 <code>{}</code> 及其内部作为整体视作 Ord, 然后根据前后紧邻的符号类型自动插入相应的间距, 而不会对 <code>{}</code> 内部的符号类型产生影响.</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center"></th>
+<th style="text-align:center">Ord</th>
+<th style="text-align:center">Op</th>
+<th style="text-align:center">Bin</th>
+<th style="text-align:center">Rel</th>
+<th style="text-align:center">Open</th>
+<th style="text-align:center">Close</th>
+<th style="text-align:center">Punct</th>
+<th style="text-align:center">Inner</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><strong>Ord</strong></td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">(2)</td>
+<td style="text-align:center">(3)</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">(1)</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>Op</strong></td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">*</td>
+<td style="text-align:center">(3)</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">(1)</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>Bin</strong></td>
+<td style="text-align:center">(2)</td>
+<td style="text-align:center">(2)</td>
+<td style="text-align:center">*</td>
+<td style="text-align:center">*</td>
+<td style="text-align:center">(2)</td>
+<td style="text-align:center">*</td>
+<td style="text-align:center">*</td>
+<td style="text-align:center">(2)</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>Rel</strong></td>
+<td style="text-align:center">(3)</td>
+<td style="text-align:center">(3)</td>
+<td style="text-align:center">*</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">(3)</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">(3)</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>Open</strong></td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">*</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>Close</strong></td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">(2)</td>
+<td style="text-align:center">(3)</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">(1)</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>Punct</strong></td>
+<td style="text-align:center">(1)</td>
+<td style="text-align:center">(1)</td>
+<td style="text-align:center">*</td>
+<td style="text-align:center">(1)</td>
+<td style="text-align:center">(1)</td>
+<td style="text-align:center">(1)</td>
+<td style="text-align:center">(1)</td>
+<td style="text-align:center">(1)</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>Inner</strong></td>
+<td style="text-align:center">(1)</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">(2)</td>
+<td style="text-align:center">(3)</td>
+<td style="text-align:center">(1)</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">(1)</td>
+<td style="text-align:center">(1)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>我们用具体的例子来进一步解释这个机制. 由于机制中关系符接二元运算符的情形并不存在, 可以观察到例子中等号 (Rel) 后的减号 (Bin) 被解释为了负号 (Ord). LaTeX 的根据类型生成空格的特性使我们在大部分情况下不需要操心过多的间距细节, 但有时候我们不得不亲力亲为才能获得较好的效果.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a        -        b        =        -      \max     \&#123;       c        ,         d       \&#125;</span><br><span class="line">Ord  \:  Bin  \:  Ord  \;  Rel  \;  Ord  \,  Op  0  Open  0  Ord  0  Punct  \,  Ord  0  Close</span><br></pre></td></tr></table></figure></p>
+<h1 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h1><p>在简单了解了机制以后, 我们来看一些建议手动调整的情形.</p>
+<ul>
+<li>定义新符号时应声明类型. 声明的方式可参考其作为前缀记法/中缀记法/后缀记法的类别或结合语义来确定. 这些声明不会设置字体, 因此有需要时应加上相应的字体设置命令.</li>
+<li>修正错误的类型识别. 产生错误识别的原因前文已解释, 此处举例说明. 例一: 在表示含有绝对值的等式时, 加号 + 和减号 - 识别为了 Bin, 而非 Ord (可选用 <code>amsmath</code> 提供的 <code>\lvert \rvert</code> 避免该问题); 对于范数的双竖线 <code>\|</code> 也会产生类似问题 (可选用 <code>amsmath</code> 提供的 <code>\lVert \rVert</code> 避免该问题). 例二: 在表示等价关系间的包含关系时, 等价关系 <code>\sim</code> 和 <code>\approx</code> 识别为了 Rel, 而非 Ord; 对于其他关系间的集论表达也可能产生类似问题.<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ |   -   x   |   =   |   +   x   | $</span><br><span class="line"> Ord Bin Ord Ord Rel Ord Bin Ord Ord</span><br><span class="line">$ |  &#123;-   x&#125;  |   =   |   &#123;+  x&#125;  | $</span><br><span class="line"> Ord Ord Ord Ord Rel Ord Ord Ord Ord</span><br><span class="line">$ \sim \subseteq \approx $</span><br><span class="line">   Rel     Rel     Rel   </span><br><span class="line">$ &#123;\sim&#125; \subseteq &#123;\approx&#125; $   </span><br><span class="line">   Ord      Rel      Ord</span><br></pre></td></tr></table></figure></li>
+<li>结合语义修改字符的默认类型. 有时, 我们所使用的符号的由语义确定的类型与 TeX 中的默认类型是不一样的. 例如, <code>\vee</code> 作为 Bin 时可以表示形式系统中的析取, 也可以表示格中元素的上确界. 而有时人们希望对析取记号的应用范围进行延伸, 用 <code>\vee</code> 的记号表示元语言中的”或”, 此时 Bin 类型对于 <code>\vee</code> 来说就不合适了 (否则 <code>\in</code> 等 Rel 符号产生的间距都比表示”或”的 <code>\vee</code> 产生的间距大), 最少应该是 Rel 类型. 类似地, 一些集论工作者喜欢使用 <code>\upharpoonright</code> 来表示二元关系上的限制, 而在 TeX 中 <code>\upharpoonright</code> 是 Rel 类型, 应当仿照其他的二元关系运算符号的类型将其修改为 Bin 类型. 见下图.<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ \&#123;\,x\;|\;x^2 \in A \vee x \geq c\,\&#125; $</span><br><span class="line">$ \&#123;\,x\;|\;x^2 \in A \mathrel&#123;\vee&#125; x \geq c\,\&#125; $</span><br><span class="line">$ S \subseteq R \upharpoonright A $</span><br><span class="line">$ S \subseteq R \mathbin&#123;\upharpoonright&#125; A $</span><br></pre></td></tr></table></figure></li>
+<li>大型运算符的声明和使用. 使用 <code>\mathop</code> 声明大型运算符时, 如不另加指定则在 <code>\displaystyle</code> 下显示 <code>\limits</code> 式的上下标. 另外, <code>amsmath</code> 提供的 <code>\operatorname</code> 和 <code>\operatorname*</code> 也可用于声明大型运算符, 前者在 <code>\displaystyle</code> 下显示 <code>\nolimits</code> 式的上下标, 后者在 <code>\displaystyle</code> 下显示 <code>\limits</code> 式的上下标. 这两个命令不仅要求了 <code>\mathop</code>, 而且对字体进行了设置 (如不另加指定则为罗马体), 并修复了单字符作大型运算符时基线不准的问题 (见下例, 参考<a href="https://tex.stackexchange.com/questions/41261/mathop-shifts-the-baseline-declaremathoperator-doesnt/41267#41267" target="_blank" rel="noopener">此处</a>). 至于在实践中, 选择 <code>\mathop</code> 或 <code>\operatorname</code> 则仁者见仁智者见智.<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ \operatorname&#123;P&#125; $ is different from $ \mathop&#123;\mathrm&#123;P&#125;&#125; $</span><br></pre></td></tr></table></figure></li>
+<li>定界符缩放控制命令对间距的影响. <code>\big \bigl \bigr \bigm</code> 均可以得到同样大小的定界符, 但会影响定界符的类型, <code>\big</code> 得到的是 Ord 类型, <code>\bigl</code> 得到的是 Open 类型, <code>\bigr</code> 得到的是 Close 类型, <code>\bigm</code> 得到的是 Rel 类型, 其余定界符缩放控制命令如 <code>\bigg \Big \Bigg</code> 同理. 而 <code>\left</code> 和 <code>\right</code> 确定的定界符则会得到一个 Inner 类型, 因此有时可能产生比 <code>\bigl \bigr</code> 控制的定界符更大的空格, 如下例所示. 所以除了通常说的 <code>\left \right</code> 不易灵活控制定界符高度外, 还可能对定界符周围的间距产生影响 (思考: 如何消除 <code>\left \right</code> 对间距的影响?).<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ a\bigl(b + c\bigr) $</span><br><span class="line">$ a\left(b + c\right) $</span><br></pre></td></tr></table></figure></li>
+<li>将文本插入数学模式. 这一话题与先前讨论的内容略有区别. 有一种回避问题的观点认为数学模式中不应该出现文本, 尽可能用符号变元替代文本并在非数学模式内对符号变元进行解释. 虽然这一理念值得提倡, 但有时却会导致描述变得繁琐复杂. 若能找到可生成恰当的间距的插入方式并适度使用, 则能得到平衡. 通常来说有两种较为可行的方式, 均采用了 <code>amsmath</code> 提供的 <code>\text</code> 指令, 两种方式在大部分情形下可获得相同的输出, 如下例所示. 前者将整个有文字连续出现的完整区域都放入 <code>\text{}</code> 中并在 <code>\text{}</code> 内再次使用数学模式, 后者则是使用 <code>\&lt;space&gt;</code> 来强制插入空格, 当 <code>\text{}</code> 中内容是英文时后者也可省略为 <code>\text{&lt;space&gt; ... &lt;space&gt;}</code> 的形式而不需要使用 <code>\&lt;space&gt;</code>. 应当注意, 如果是 <code>\text{}</code> 内是中文, 则 <code>\&lt;space&gt;</code> 是不能省略为 <code>\text{&lt;space&gt; ... &lt;space&gt;}</code> 的形式, 否则生成的间隔会不正确 (try it ?).  另外, 当 <code>\text{}</code> 处于 <code>\scriptstyle</code> 或 <code>\scriptscriptstyle</code> 下, 这两种方法会生成不同长度的间隔, 后者的间隔长度偏长 (try it ?).<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ \sup\&#123;\,\operatorname&#123;card&#125;(B)\;|\;\text&#123;$ B $ is a chain of $ A $&#125;\,\&#125; $</span><br><span class="line">$ \sup\&#123;\,\operatorname&#123;card&#125;(B)\;|\;B\ \text&#123;is a chain of&#125;\ A\,\&#125; $</span><br></pre></td></tr></table></figure></li>
+<li>精细调整的限度. Knuth 本人也在 The TeXbook 中给出了一些关于精细调整的使用建议, 我们简化摘选了一部分列在下面, 可以发现精细调整无处不在. 如何在专注于内容和精细化排版细节间进行取舍 (或是选择花费更长时间两个都要) 也是每一位 LaTeX 使用者需要思考的.<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ 13!26! $     $ x^2/2 $     $ n/\log n $     $ \sqrt&#123;2&#125; x $      $ [0,1) $     $ \ln n(\ln\ln n)^2 $     $ \sin^2 x $\\</span><br><span class="line">$ 13!\,26! $   $ x^2\!/2 $   $ n/\!\log n $   $ \sqrt&#123;2&#125; \, x $   $ [\,0,1) $   $ \ln n\,(\ln\ln n)^2 $   $ \sin^2\! x $</span><br></pre></td></tr></table></figure>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1>在 LaTeX 的数学模式下的间距控制是一个复杂的问题, 远不是本文可以全部阐释清楚的. 本文中提及的一些方法和建议仅供参考, 如有不正确之处还请指正. 除了间距的调整, LaTeX 的数学模式下还有大量的可以精细调整之处, 诸如对分式高度长度, 根式高度斜率, 角标位置等的调整 (可能以后会写…</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%8E%92%E7%89%88/" rel="tag"># 排版</a>
+              <a href="/tags/LaTeX/" rel="tag"># LaTeX</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/2020/02/10/Haskell%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" rel="next" title="Haskell 开发环境搭建">
+                  <i class="fa fa-chevron-left"></i> Haskell 开发环境搭建
+                </a>
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+            </div>
+          </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="comments"></div>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#介绍"><span class="nav-number">1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#原理"><span class="nav-number">2.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#应用"><span class="nav-number">3.</span> <span class="nav-text">应用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="site-author-image" itemprop="image" alt="Lonicera"
+    src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Lonicera</p>
+  <div class="site-description" itemprop="description">Pour l'honneur de l'esprit humain</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="/mailto:lonicera@stu.cpu.edu.cn" title="E-Mail &rarr; mailto:lonicera@stu.cpu.edu.cn" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/2890043134" title="Weibo &rarr; https://weibo.com/2890043134" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/zhi-zi-ren-dong" title="ZhiHu &rarr; https://www.zhihu.com/people/zhi-zi-ren-dong" rel="noopener" target="_blank"><i class="fa fa-fw fa-cube"></i>ZhiHu</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.douban.com/people/141574328" title="Douban &rarr; https://www.douban.com/people/141574328" rel="noopener" target="_blank"><i class="fa fa-fw fa-book"></i>Douban</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/null" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lonicera</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.5.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+
+<script>
+NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(item => {
+    return GUEST.includes(item);
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'iJlIp3YWywtDaDOHoeTOXd8Q-9Nh9j0Va',
+    appKey: 'HbBVB1s3YvdjOntGTxFqEpK4',
+    placeholder: "Just go go",
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: true,
+    lang: 'zh-cn' || 'zh-cn',
+    path: location.pathname,
+    recordIP: false,
+    serverURLs: ''
+  });
+}, window.Valine);
+</script>
+
+</body>
+</html>
