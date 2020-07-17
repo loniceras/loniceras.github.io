@@ -1,5 +1,5 @@
 ---
-title: Haskell开发环境搭建
+title: Haskell 开发环境搭建
 date: 2020-02-10 12:43:59
 tags: [编程]
 categories: [编程]
