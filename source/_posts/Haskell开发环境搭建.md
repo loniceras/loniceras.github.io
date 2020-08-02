@@ -9,7 +9,14 @@ mathjax: false
 本文是在 Windows 10 操作系统下使用 [Stack](https://docs.haskellstack.org/en/stable/README/) 搭建在 VSCode 中的基于 [Haskell IDE Engine](https://github.com/haskell/haskell-ide-engine) ( HIE ) 的 Haskell 开发环境的介绍. Stack ( [GitHub页面](https://github.com/commercialhaskell/stack) ) 是用于开发 Haskell 的一个交互平台, 可以用于安装 Haskell 的编译器和各种库, 也可以用于构建和测试项目. Stack 对库的版本管理一定程度上依赖于[解析器](https://docs.haskellstack.org/en/stable/yaml_configuration/#resolver)的选择, 解析器支持 [LTS 快照](https://github.com/commercialhaskell/lts-haskell), [Stackage Nightly快照](https://github.com/commercialhaskell/stackage-nightly)等多种格式对版本进行指定, 一个快照下的一个库只能拥有一个版本号, 可在 [Stackage 网站](https://www.stackage.org/)上查询不同 GHC 对应的最新 LTS 快照. 更多有关 Stack 的教程可以参考[用户文档](https://github.com/commercialhaskell/stack/blob/master/doc/GUIDE.md). HIE 是一个针对不断增长的 Haskell 工具的一个通用接口, 它为编辑器和 IDE 提供了功能齐全的语言服务器协议服务, HIE 目前支持的最低 Stack 版本为 2.1.1, 它仍然在不断开发中.
 <!--more-->
 # 配置 Stack
-从 [Stack 官网](https://docs.haskellstack.org/en/stable/install_and_upgrade/#windows) 下载 Stack 的安装包并进行安装. 安装完毕后, 以管理员身份运行 CMD , 执行 `stack setup` , 直至生成 `C:\sr\config.yaml`. 随后打断 CMD 的操作, 在 `config.yaml` 文件中进行换源, 可以使用的 Hackage 镜像有:
+从 [Stack 官网](https://docs.haskellstack.org/en/stable/install_and_upgrade/#windows) 下载 Stack 的安装包并进行安装. 安装完毕后, 以管理员身份运行 CMD , 执行 `stack setup` , 直至生成 `C:\sr\config.yaml`. 随后打断 CMD 的操作, 在 `config.yaml` 文件中进行换源. 可以使用的 Stackage 镜像有:
+https://mirrors.tuna.tsinghua.edu.cn/help/stackage/
+```
+setup-info-locations: ["http://mirrors.tuna.tsinghua.edu.cn/stackage/stack-setup.yaml"]
+urls:
+  latest-snapshot: http://mirrors.tuna.tsinghua.edu.cn/stackage/snapshots.json
+```
+可以使用的 Hackage 镜像有:
 https://mirrors.tuna.tsinghua.edu.cn/help/hackage/
 ```
 package-indices:
@@ -57,3 +64,6 @@ package-indices:
 
 # 后记
 笔者根据该[建议](https://github.com/bitemyapp/learnhaskell/blob/master/guide-zh_CN.md)选择使用 Stack 代替 Haskell Platform 进行 GHC 和库的管理, 便有了这次重新搭建开发环境的尝试. 中文社区基本没有可用的博客和说明, 大都语焉不详或早已过时. 尽管笔者仔细参考了官方文档, 在这次配置过程中仍踩了很多很多很多很多很多很多的坑, 但经过不断查阅社区资料后最终还是配置成功了. 笔者从多而繁杂的解决过程中选择了一些简单明了的方案总结在此文中, 希望能为同好们节省尝试的时间.
+
+# 更新内容
+2020.08.02 记录: 一周前 (7.28), VSCode 拥有了一个更智能的 Haskell 语言支持插件, 即由 Haskell 发布的 [Haskell](https://github.com/haskell/vscode-haskell). 该插件是由 [Haskell Language Server](https://github.com/haskell/haskell-language-server/) 驱动的, 该语言服务整合了 [ghcide](https://github.com/digital-asset/ghcide) 和前述的 HIE. 现在环境搭建更为简单, 下载完插件后会自动下载并部署相应二进制文件, 即 `haskell-language-server-0.2.2-win32-8.6.5` 和 `haskell-language-server-wrapper-0.2.2-win32`. 如果在配置中遇到任何前人未提及的障碍, 建议先更新 Stack 至最新版本 (目前最新版本是 `v2.3.1`).
