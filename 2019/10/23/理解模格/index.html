@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 4.0.0">
+<meta name="generator" content="Hexo 5.3.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
@@ -50,15 +50,17 @@
   };
 </script>
 
-  <meta name="description" content="预备部分本文分为两个部分讨论模格, 第一部分考察模格的定义和动机并给出一些实例, 第二部分介绍模格的主要性质和结构定理. 记号约定: 格 $ (L,\leq) $, $ x \vee y = \sup \{x,y\} $, $ x \wedge y = \inf \{x,y\} $, $ [x,y]=\{\,z \in L\,|\,x \leq z \leq y\,\} $. 覆盖关系 $ \sq">
-<meta name="keywords" content="数学">
+  <meta name="description" content="预备部分本文分为两个部分讨论模格, 第一部分考察模格的定义和动机并给出一些实例, 第二部分介绍模格的主要性质和结构定理. 记号约定: 格 $ (L,\leq) $, $ x \vee y &#x3D; \sup \{x,y\} $, $ x \wedge y &#x3D; \inf \{x,y\} $, $ [x,y]&#x3D;\{\,z \in L\,|\,x \leq z \leq y\,\} $. 覆盖关系 $ \sq">
 <meta property="og:type" content="article">
 <meta property="og:title" content="如何理解模格?">
-<meta property="og:url" content="http:&#x2F;&#x2F;loniceras.github.io&#x2F;2019&#x2F;10&#x2F;23&#x2F;%E7%90%86%E8%A7%A3%E6%A8%A1%E6%A0%BC&#x2F;index.html">
+<meta property="og:url" content="http://loniceras.github.io/2019/10/23/%E7%90%86%E8%A7%A3%E6%A8%A1%E6%A0%BC/index.html">
 <meta property="og:site_name" content="Lonicera&#39;s Blog">
-<meta property="og:description" content="预备部分本文分为两个部分讨论模格, 第一部分考察模格的定义和动机并给出一些实例, 第二部分介绍模格的主要性质和结构定理. 记号约定: 格 $ (L,\leq) $, $ x \vee y = \sup \{x,y\} $, $ x \wedge y = \inf \{x,y\} $, $ [x,y]=\{\,z \in L\,|\,x \leq z \leq y\,\} $. 覆盖关系 $ \sq">
-<meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-07-13T08:02:35.826Z">
+<meta property="og:description" content="预备部分本文分为两个部分讨论模格, 第一部分考察模格的定义和动机并给出一些实例, 第二部分介绍模格的主要性质和结构定理. 记号约定: 格 $ (L,\leq) $, $ x \vee y &#x3D; \sup \{x,y\} $, $ x \wedge y &#x3D; \inf \{x,y\} $, $ [x,y]&#x3D;\{\,z \in L\,|\,x \leq z \leq y\,\} $. 覆盖关系 $ \sq">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-10-23T09:15:38.000Z">
+<meta property="article:modified_time" content="2020-07-13T08:02:35.826Z">
+<meta property="article:author" content="Lonicera">
+<meta property="article:tag" content="数学">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="http://loniceras.github.io/2019/10/23/%E7%90%86%E8%A7%A3%E6%A8%A1%E6%A0%BC/">
@@ -291,7 +293,7 @@
         <h1 id="预备部分"><a href="#预备部分" class="headerlink" title="预备部分"></a>预备部分</h1><p>本文分为两个部分讨论模格, 第一部分考察模格的定义和动机并给出一些实例, 第二部分介绍模格的主要性质和结构定理. 记号约定: 格 $ (L,\leq) $, $ x \vee y = \sup \{x,y\} $, $ x \wedge y = \inf \{x,y\} $, $ [x,y]=\{\,z \in L\,|\,x \leq z \leq y\,\} $. 覆盖关系 $ \sqsubset $ 满足 $ x \sqsubset y $ 当且仅当 $ x&lt;y $ 且对任意 $ z \in L $ 都有 $ x \leq z \leq y $ 蕴涵 $ z=x $ 或 $ z=y $. $ {\sqsubseteq} = {\sqsubset} \cup {\varDelta_L} $, $ \varDelta_L $ 为 $ L $ 上的单位关系. 模的 (modular) : $ (\forall x,y,z \in L) \; x \leq y \rightarrow (x \vee z) \wedge y = x \vee (z \wedge y) $. 实际上, 由于对任意格 $ L $ 都有 $ (\forall x,y,z \in L) \; x \leq y \rightarrow (x \vee z) \wedge y \geq x \vee (z \wedge y) $, 因此模格的定义可以精炼为 $ (\forall x,y,z \in L) \; x \leq y \rightarrow (x \vee z) \wedge y \leq x \vee (z \wedge y) $.</p>
 <a id="more"></a>
 <h1 id="模格的定义与实例"><a href="#模格的定义与实例" class="headerlink" title="模格的定义与实例"></a>模格的定义与实例</h1><p>令 $ a,b \in L $ 满足 $ a \leq b $. 一种朴素的想法是: 如何建立 $ L $ 中任意元素和任意选取的区间 $ [a,b] $ 之间的关系. 此时, 我们考虑映射 $ j_a \colon L \to L $ 满足对任意 $ z \in L $ 都有 $ j_a(z)=a \vee z $, 映射 $ m_b \colon L \to L $ 满足对任意 $ z \in L $ 都有 $ m_b(z)=b \wedge z $. 注意到映射 $ m_b \circ j_a $ 和映射 $ j_a \circ m_b $ 均可将 $ L $ 中任意元素映到 $ [a,b] $ 中, 这样我们的想法已经初步实现, 但 $ m_b \circ j_a(z) $ 和 $ j_a \circ m_b(z) $ 通常是不同的, 也就是说我们现在有两种不同的建立关系的方法, 具体地我们还有 $ m_b \circ j_a(z) \geq j_a \circ m_b(z) $, $ m_b \circ j_a(z) \in [z \wedge b,b] $, $ j_a \circ m_b(z) \in [a,a \vee z] $. 对于模格来说, 我们有 $ m_b \circ j_a(z) = j_a \circ m_b(z) $, 此时两种方法得到统一, 这一重要特点使得模格具有很多良好的性质. 另一方面, 模格是分配格的一种合理且自然的弱化, 可以证明格是分配的当且仅当 $ (\forall x,y,z \in L)\; (x \vee z) \wedge y \leq x \vee (z \wedge y) $. 这样就可以十分容易发现分配格蕴涵模格, 虽然证明是简单的, 但大部分格论专著或教材中并不会指出这一点, 证明可以参见 [Grä 11] . 模格的一种弱化是半模格 (semimodular), 它比模格具有更少的限制. 代数也为模格提供了一些重要的实例可以帮助我们感受模格的特点. 考虑群 $ (G,\cdot) $, 其全体正规子群构成的集合关于包含关系构成模格 $ (\operatorname{N}(G),\subseteq) $, 即 $ (\forall S,T,X \in \operatorname{N}(G))\; S \subseteq T \rightarrow (SX) \cap T = S (X \cap T) $. 事实上, 若 $ S,T $ 为 $ G $ 的正规子群, 则 $ S \wedge T=S \cap T $, $ S \vee T=ST $. 注: $ (\operatorname{N}(G),\subseteq) $ 的模格定义在群论中称为戴德金模律(Dedekind Modular Law), 并可以借助陪集的性质将该结论推广到 $ S,T,X $ 为 $ G $ 的子群的情况(见 [Rob 96]), 但应该注意的是由于子群的乘积并不能总成为子群的上确界, 因此在子群乘法运算下不能构成格, 更不可能是模格. 对于其他代数结构 (如模) 也有类似的结论.</p>
-<h1 id="模格的性质"><a href="#模格的性质" class="headerlink" title="模格的性质"></a>模格的性质</h1><p>模格的最广为人知的一个等价判据是 $ L $ 不存在与 Pentagon ($ N_5 $) 同构的子格, 如<a href="https://pic4.zhimg.com/80/v2-98de114c6cb0c04353e338c0cfa8bd79_hd.jpg" target="_blank" rel="noopener">哈斯图</a>所示, $ m_b \circ j_a(z)=b $, $ j_a \circ m_b(z) =a $, 这明显与我们前面对模格的刻画是不符的. 事实上, $ N_5 $ 是最小的非模的格. 可以想象, 当 Pentagon 的哈斯图中的 $ a,b $ 合并为一个点 $ y $ 时 (形成一个菱形满足 $ p \sqsubset y \sqsubset q $ 且 $ p \sqsubset z \sqsubset q $), 此时符合了我们对模格的刻画, 我们也允许一个菱形内部存在多个共用上下端点的四边形 (存在除了 $ y,z $ 外满足 $ p \sqsubset ? \sqsubset q $ 的元素). 因此, 我们能够利用元素的相对补 (relative complement) 来刻画模格 [Rom 08]: 对任意 $ x,p,q \in L $, 若 $ x $ 存在关于 $ [p,q] $ 的相对补, 则 $ x $ 关于 $ [p,q] $ 的所有相对补构成的集合是反链. 例如, 菱形哈斯图中 $ x $ 关于 $ [p,q] $ 的所有相对补构成的集合为单元素集; 菱形哈斯图内部存在 $ n $ 个满足 $ p \sqsubset ? \sqsubset q $ 关系的元素时 $ x $ 关于 $ [p,q] $ 的所有相对补构成的集合有 $ n+1 $ 元素. 如果将菱形堆积起来形成的哈斯图对应的格也是模的. 因此, 我们就有了一个与戴德金转置原则密切相关的模格等价判据 [Rom 08]: 若 $ y,z \in L $, 则令映射 $ \varphi_y \colon [y \wedge z, z] \to [y,y \vee z] $ 满足对任意 $ x \in [y \wedge z, z] $ 都有 $ \varphi_y(x)=y \vee x $, 映射 $ \psi_z \colon [y,y \vee z] \to [y \wedge z, z] $ 满足对任意 $ x \in [y,y \vee z] $ 都有 $ \psi_z(x)=z \wedge x $. $ L $ 是模的, 当且仅当 $ (\forall y,z \in L) \; \psi_z \circ \varphi_y = \varDelta_{[y \wedge z, z]} $, 当且仅当 $ (\forall y,z \in L) \; \varphi_y \circ \psi_z = \varDelta_{[y,y \vee z]} $.</p>
+<h1 id="模格的性质"><a href="#模格的性质" class="headerlink" title="模格的性质"></a>模格的性质</h1><p>模格的最广为人知的一个等价判据是 $ L $ 不存在与 Pentagon ($ N_5 $) 同构的子格, 如<a target="_blank" rel="noopener" href="https://pic4.zhimg.com/80/v2-98de114c6cb0c04353e338c0cfa8bd79_hd.jpg">哈斯图</a>所示, $ m_b \circ j_a(z)=b $, $ j_a \circ m_b(z) =a $, 这明显与我们前面对模格的刻画是不符的. 事实上, $ N_5 $ 是最小的非模的格. 可以想象, 当 Pentagon 的哈斯图中的 $ a,b $ 合并为一个点 $ y $ 时 (形成一个菱形满足 $ p \sqsubset y \sqsubset q $ 且 $ p \sqsubset z \sqsubset q $), 此时符合了我们对模格的刻画, 我们也允许一个菱形内部存在多个共用上下端点的四边形 (存在除了 $ y,z $ 外满足 $ p \sqsubset ? \sqsubset q $ 的元素). 因此, 我们能够利用元素的相对补 (relative complement) 来刻画模格 [Rom 08]: 对任意 $ x,p,q \in L $, 若 $ x $ 存在关于 $ [p,q] $ 的相对补, 则 $ x $ 关于 $ [p,q] $ 的所有相对补构成的集合是反链. 例如, 菱形哈斯图中 $ x $ 关于 $ [p,q] $ 的所有相对补构成的集合为单元素集; 菱形哈斯图内部存在 $ n $ 个满足 $ p \sqsubset ? \sqsubset q $ 关系的元素时 $ x $ 关于 $ [p,q] $ 的所有相对补构成的集合有 $ n+1 $ 元素. 如果将菱形堆积起来形成的哈斯图对应的格也是模的. 因此, 我们就有了一个与戴德金转置原则密切相关的模格等价判据 [Rom 08]: 若 $ y,z \in L $, 则令映射 $ \varphi_y \colon [y \wedge z, z] \to [y,y \vee z] $ 满足对任意 $ x \in [y \wedge z, z] $ 都有 $ \varphi_y(x)=y \vee x $, 映射 $ \psi_z \colon [y,y \vee z] \to [y \wedge z, z] $ 满足对任意 $ x \in [y,y \vee z] $ 都有 $ \psi_z(x)=z \wedge x $. $ L $ 是模的, 当且仅当 $ (\forall y,z \in L) \; \psi_z \circ \varphi_y = \varDelta_{[y \wedge z, z]} $, 当且仅当 $ (\forall y,z \in L) \; \varphi_y \circ \psi_z = \varDelta_{[y,y \vee z]} $.</p>
 <p>由于模格具有的良好性质, 许多经典的代数定理都有模格的表述, 部分定理的模格表述在将其推广至泛代数 ([Cohn 81]) 情形时发挥了重要作用. 前述的戴德金转置原则 (Dedekind’s Transposition Principle) 是菱形同构定理 (Diamond Isomorphism Theorem) 的格论表述, 其群论表述是广为人知的诺特同构定理中的一条. 和群论类似, 戴德金转置原则可以推导出蝴蝶引理 (Zassenhaus Lemma) 的格论表述. 合成列相关的施赖埃尔定理 (Schreier Refinement Theorem) 和若当-赫尔德定理 (Jordan-Hölder Theorem) 有格论表述. 直积分解相关的克鲁尔-施密特定理 (Krull-Schmidt Theorem) 也有格论表述, 其弱化形式称为库洛什-奥尔定理 (Kurosh-Ore Theorem). 下面用尽可能少的术语 (相应地, 更长的表述) 来介绍一下这些工作并给出参考文献, 先给出一些定义: 若 $ A,B $ 为 $ L $ 的链满足 $ A \subseteq B $, $ \min A=\min B $, $ \max A=\max B $, 则称 $ B $ 为 $ A $ 的加细. 若 $ B $ 为 $ A $ 的加细 (refinement), 且 $ A \subsetneqq B $, 则称 $ B $ 为 $ A $ 的真加细 (proper refinement). 若 $ A $ 不存在真加细, 则称 $ A $ 为不可加细 (unrefinable). 若 $ l $ 不为 $ L $ 的最小元, 且对任意 $ x,y \in L $ 都有 $ l=x \vee y $ 蕴涵 $ l=x $ 或 $ l=y $, 则称 $ l $ 为并不可约的 (join-irreducible).</p>
 <ul>
 <li><p>戴德金转置原则: 若 $ x,y \in L $ , 则存在格同构 $ [x \wedge y,x] \cong [y, x \vee y] $. 戴德金转置原则几乎是模格最重要的性质, 绝大多数格论的教材或专著都不会省略它. “对任意 $ x,y \in L $, 戴德金转置原则都成立”是我们前述的最后一个模格等价判据的弱化, 它仅能作为有限格和代数格的模格判据 [Grä 11]. 由于戴德金转置原则表现出的哈斯图是个菱形, 因此相关的同构定理也称为菱形同构定理. 以群论的菱形同构定理为例: 若 $ (G,\cdot) $ 为群, $ T $ 为 $ G $ 的子群, $ N $ 为 $ G $ 的子规子群, 则 $ T/(T \cap N) \cong TN/N $. 该定理表现出的哈斯图也是个菱形, 且 $ TN=\langle T \cup N \rangle=T \vee N $.</p>
@@ -370,7 +372,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#预备部分"><span class="nav-number">1.</span> <span class="nav-text">预备部分</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#模格的定义与实例"><span class="nav-number">2.</span> <span class="nav-text">模格的定义与实例</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#模格的性质"><span class="nav-number">3.</span> <span class="nav-text">模格的性质</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考文献"><span class="nav-number">4.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%A2%84%E5%A4%87%E9%83%A8%E5%88%86"><span class="nav-number">1.</span> <span class="nav-text">预备部分</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A8%A1%E6%A0%BC%E7%9A%84%E5%AE%9A%E4%B9%89%E4%B8%8E%E5%AE%9E%E4%BE%8B"><span class="nav-number">2.</span> <span class="nav-text">模格的定义与实例</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A8%A1%E6%A0%BC%E7%9A%84%E6%80%A7%E8%B4%A8"><span class="nav-number">3.</span> <span class="nav-text">模格的性质</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="nav-number">4.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -406,7 +408,7 @@
 </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
-        <a href="/mailto:lonicera@stu.cpu.edu.cn" title="E-Mail &rarr; mailto:lonicera@stu.cpu.edu.cn" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+        <a href="mailto:loniceras@163.com" title="E-Mail &rarr; mailto:loniceras@163.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
       </span>
       <span class="links-of-author-item">
         <a href="https://weibo.com/2890043134" title="Weibo &rarr; https://weibo.com/2890043134" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
@@ -441,13 +443,13 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2020</span>
+  <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">Lonicera</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.0.0
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v5.3.0
   </div>
   <span class="post-meta-divider">|</span>
   <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.5.0
@@ -475,9 +477,17 @@
   <script src="/lib/anime.min.js"></script>
   <script src="/lib/velocity/velocity.min.js"></script>
   <script src="/lib/velocity/velocity.ui.min.js"></script>
-<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
 <script src="/js/schemes/pisces.js"></script>
+
+
 <script src="/js/next-boot.js"></script>
+
 
 
 
@@ -486,7 +496,9 @@
 
 
 
-  <script src="/js/local-search.js"></script>
+  
+<script src="/js/local-search.js"></script>
+
 
 
 
